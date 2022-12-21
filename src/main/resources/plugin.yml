@@ -1,0 +1,27 @@
+name: KeepInventory
+version: 1.0
+main: io.github.tjf801.KeepInventoryPlugin.KeepInventoryPlugin
+api-version: 1.19
+depend: [CommandAPI]
+permissions:
+  keepinventory.*:
+    description: Gives access to all KeepInventory actions and commands.
+    default: op
+    children:
+      keepinventory.command: true
+  keepinventory.enabled:
+    description: Internal permission for enabling KeepInventory.
+  keepinventory.command:
+    description: Gives full access to the /keepinventory command.
+    children:
+      keepinventory.command.self: true
+  keepinventory.command.self:
+    description: Gives the user the ability to toggle their own personal keepInventory gamerule.
+    children:
+      keepinventory.command.self.on: true
+      keepinventory.command.self.off: true
+  keepinventory.command.self.on:
+    description: Gives the user the ability to turn on their own personal keepInventory gamerule.
+  keepinventory.command.self.off:
+    description: Gives the user the ability to turn off their own personal keepInventory gamerule.
+    default: true
