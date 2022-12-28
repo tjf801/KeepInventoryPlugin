@@ -1,6 +1,5 @@
 keepinventory:
   enabled-by-default: false
   default-permissions:
-    - keepinventory.command.self.on
-    - keepinventory.command.self.off
+    - keepinventory.command.check.self
   enabled-player-uuids:

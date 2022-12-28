@@ -1,27 +1,45 @@
 name: KeepInventory
-version: 1.0
+version: 1.1
 main: io.github.tjf801.KeepInventoryPlugin.KeepInventoryPlugin
 description: Allows greater user control over the keepInventory gamerule.
 api-version: 1.19
 depend: [CommandAPI]
 permissions:
+  keepinventory.enabled:
+    description: Internal permission that enables keepInventory for a user.
   keepinventory.*:
     description: Gives access to all KeepInventory actions and commands.
     default: op
     children:
       keepinventory.command: true
-  keepinventory.enabled:
-    description: Internal permission for enabling KeepInventory.
   keepinventory.command:
     description: Gives full access to the /keepinventory command.
     children:
+      keepinventory.command.check: true
+      keepinventory.command.self: true
+      keepinventory.command.players: true
+  keepinventory.command.check:
+    description: Gives the user the ability to check the status of a player's personal keepInventory gamerule.
+    children:
+      keepinventory.command.check.self: true
+      keepinventory.command.check.players: true
+    keepinventory.command.check.self:
+      description: Gives the user the ability to check their own personal keepInventory gamerule.
+    keepinventory.command.check.players:
+      description: Gives the user the ability to check the keepInventory gamerule of any player. (unimplemented)
+  keepinventory.command.players:
+    description: Gives the user the ability to change the keepInventory gamerule of any player(s).
+    children:
       keepinventory.command.self: true
   keepinventory.command.self:
-    description: Gives the user the ability to toggle their own personal keepInventory gamerule.
+    description: Gives the user the ability to change their own personal keepInventory gamerule.
     children:
       keepinventory.command.self.on: true
       keepinventory.command.self.off: true
-  keepinventory.command.self.on:
-    description: Gives the user the ability to turn on their own personal keepInventory gamerule.
-  keepinventory.command.self.off:
-    description: Gives the user the ability to turn off their own personal keepInventory gamerule.
+      keepinventory.command.self.toggle: true
+    keepinventory.command.self.on:
+      description: Gives the user the ability to turn on their own personal keepInventory gamerule.
+    keepinventory.command.self.off:
+      description: Gives the user the ability to turn off their own personal keepInventory gamerule.
+    keepinventory.command.self.toggle:
+      description: Gives the user the ability to toggle their own personal keepInventory gamerule.
