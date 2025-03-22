@@ -15,10 +15,8 @@ import java.util.UUID;
 public class PlayerPermissionManager implements Listener {
     private final KeepInventoryPlugin plugin;
 
-    // TODO: should this be sync?
-    // TODO: get this to be private again
     // contains a map of online players and their permission attachments
-    public final HashMap<UUID, PermissionAttachment> keepInventory = new HashMap<>();
+    private final HashMap<UUID, PermissionAttachment> keepInventory = new HashMap<>();
 
     public PlayerPermissionManager(KeepInventoryPlugin plugin) {this.plugin = plugin;}
 
@@ -31,6 +29,11 @@ public class PlayerPermissionManager implements Listener {
         var attachment = player.addAttachment(plugin);
         keepInventory.put(uuid, attachment);
         return attachment;
+    }
+
+    void setKeepInventory(@Nonnull Player player, boolean enabled) {
+        this.keepInventory.get(player.getUniqueId()).setPermission("keepinventory.enabled", enabled);
+        updatePlayerConfigs(player);
     }
 
     void applyDefaultPermissions(@Nonnull Player player, @Nonnull FileConfiguration config) {

@@ -1,5 +1,6 @@
 keepinventory:
   enabled-by-default: false
+  pvp-keepinventory: false
   default-permissions:
     - keepinventory.command.check.self
   enabled-player-uuids:
